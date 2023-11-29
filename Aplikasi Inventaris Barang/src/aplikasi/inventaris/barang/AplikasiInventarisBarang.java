@@ -244,7 +244,7 @@ public class AplikasiInventarisBarang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttambahActionPerformed
-    // Check if any of the fields is empty
+    // mencek jika ada text field kosong atau combo box yang tidak di pilih
     if (tfkodebarang.getText().isEmpty()) {
         JOptionPane.showMessageDialog(null, "Error: Kode Barang kosong!",
                 "Error: isian Kode Barang kosong!", JOptionPane.WARNING_MESSAGE);
@@ -259,7 +259,7 @@ public class AplikasiInventarisBarang extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Error: Tipe Barang belum di pilih!",
                 "Error: Tipe Barang belum di pilih!", JOptionPane.WARNING_MESSAGE);
         try {
-            // Use Robot class to move the mouse to cbtipebarang
+            // Menggunakan class robot untuk memindahkan  cursour mouse otomatis ke cbtipebarang jika cbtipebarang belum di pilih
             Robot robot = new Robot();
             robot.mouseMove(cbtipebarang.getLocationOnScreen().x + cbtipebarang.getWidth() / 2, cbtipebarang.getLocationOnScreen().y + cbtipebarang.getHeight() / 2);
         } catch (AWTException e) {
@@ -272,18 +272,18 @@ public class AplikasiInventarisBarang extends javax.swing.JFrame {
         return;
     }
 
-    // Get data from text fields
+    // Mengambil data dari text fields dan combo box
     String kode = tfkodebarang.getText();
     String nama = tfnamabarang.getText();
     String tipe = cbtipebarang.getSelectedItem().toString();
     String stok = tfstokbarang.getText();
 
-    // Add the data to the table
+    // Menambah data ke dalam tabel
     DefaultTableModel model = (DefaultTableModel) tbdatabarang.getModel();
     Object[] row = {kode, nama, tipe, stok};
     model.addRow(row);
 
-    // Clear the text fields after adding data
+    // Menclear text field dan combo box setelah menambah data ke dalam tabel
     tfkodebarang.setText("");
     tfnamabarang.setText("");
     cbtipebarang.setSelectedIndex(0);
@@ -292,33 +292,33 @@ public class AplikasiInventarisBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_bttambahActionPerformed
 
     private void btbatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbatalActionPerformed
-        // Clear the text fields
+        // Clear text fields dan combo box
     tfkodebarang.setText("");
     tfnamabarang.setText("");
     cbtipebarang.setSelectedIndex(0);
     tfstokbarang.setText("");
     
-    // Clear the selection in the table
+    // Clear data yang di select di dalam tabel
     tbdatabarang.clearSelection();
     }//GEN-LAST:event_btbatalActionPerformed
 
     private void btubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btubahActionPerformed
-        // Get the selected row index
+        // Ambil baris yang dipilih pada tabel
     int selectedRowIndex = tbdatabarang.getSelectedRow();
 
-    // Check if a row is selected
+    // Mencek jika baris belum dipilih di tabel
     if (selectedRowIndex == -1) {
         JOptionPane.showMessageDialog(null, "Error: Pilih data terlebih dahulu!", "Error: Data belum dipilih!", JOptionPane.WARNING_MESSAGE);
         return;
     }
 
-    // Get the data from the selected row
+    // Mengambil data dari baris yang dipilih
     String kode = tbdatabarang.getValueAt(selectedRowIndex, 0).toString();
     String nama = tbdatabarang.getValueAt(selectedRowIndex, 1).toString();
     String tipe = tbdatabarang.getValueAt(selectedRowIndex, 2).toString();
     String stok = tbdatabarang.getValueAt(selectedRowIndex, 3).toString();
 
-    // Display the data in the text fields and combo box
+    // Menampilkan data di dalam text fields and combo box
     tfkodebarang.setText(kode);
     tfnamabarang.setText(nama);
     cbtipebarang.setSelectedItem(tipe);
@@ -326,60 +326,58 @@ public class AplikasiInventarisBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_btubahActionPerformed
 
     private void bthapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthapusActionPerformed
-         // Get the selected row index
+         // Ambil baris yang dipilih pada tabel
     int selectedRow = tbdatabarang.getSelectedRow();
 
-    // Check if a row is selected
+    // Mencek jika baris belum dipilih di tabel
     if (selectedRow == -1) {
          JOptionPane.showMessageDialog(null, "Error: Pilih Data terlebih dahulu!",
                 "Error: Pilih Data!", JOptionPane.WARNING_MESSAGE);
         return;
          }
 
-    // Remove the selected row from the table
+    // Hapus baris pada baris yang dipilih pada tabel
     DefaultTableModel model = (DefaultTableModel) tbdatabarang.getModel();
     model.removeRow(selectedRow);
     }//GEN-LAST:event_bthapusActionPerformed
 
     private void btkeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btkeluarActionPerformed
-         // Exit the application
+         // Keluar dari aplikasi
     System.exit(0);
     }//GEN-LAST:event_btkeluarActionPerformed
 
     private void btsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsimpanActionPerformed
-   // Get the selected row index
+   // Ambil baris yang dipilih pada tabel
     int selectedRowIndex = tbdatabarang.getSelectedRow();
 
-    // Check if a row is selected
+    // Mencek jika baris belum dipilih di tabel
     if (selectedRowIndex == -1) {
-        // Display an error message or handle it as per your requirement
-        // You may show a JOptionPane.showMessageDialog for example
         JOptionPane.showMessageDialog(null, "Error: Pilih data terlebih dahulu!",
                 "Error: Data belum dipilih!", JOptionPane.WARNING_MESSAGE);
         return;
     }
 
-    // Get the data from the text fields
+    // Mengambil data dari baris yang dipilih
     String kode = tfkodebarang.getText();
     String nama = tfnamabarang.getText();
     String tipe = cbtipebarang.getSelectedItem().toString();
     String stok = tfstokbarang.getText();
 
-    // Check if any of the fields is empty
+    // Mencek ada field yang kosong
     if (kode.isEmpty() || nama.isEmpty() || tipe.equals("Pilih") || stok.isEmpty()) {
-        // Display an error message or handle it as per your requirement
-        // You may show a JOptionPane.showMessageDialog for example
+      JOptionPane.showMessageDialog(null, "Error: Field tidak boleh kosong",
+                "Error: Data belum dipilih!", JOptionPane.WARNING_MESSAGE);
         return;
     }
 
-    // Update the selected row in the table
+    // Memperbarui baris yang dipilih di tabel
     DefaultTableModel model = (DefaultTableModel) tbdatabarang.getModel();
     model.setValueAt(kode, selectedRowIndex, 0);
     model.setValueAt(nama, selectedRowIndex, 1);
     model.setValueAt(tipe, selectedRowIndex, 2);
     model.setValueAt(stok, selectedRowIndex, 3);
 
-    // Clear the text fields after updating
+    // Clear text fields dan combo box setelah memperbarui data pada baris yang dipilih 
     tfkodebarang.setText("");
     tfnamabarang.setText("");
     cbtipebarang.setSelectedIndex(0);
